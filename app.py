@@ -8,12 +8,12 @@ app = FastAPI()
 
 # human readable       
 @app.get('/')
-def home():
+async def home():
     return {'message':'Insurance Premium Prediction API'}
 
 # machine readable
 @app.get('/health')
-def health_check():
+async def health_check():
     return {
         'status': 'OK',
         'version': MODEL_VERSION,
@@ -21,7 +21,7 @@ def health_check():
     }
 
 @app.post('/predict', response_model=PredictionResponse)
-def predict_premium(data: UserInput):
+async def predict_premium(data: UserInput):
 
     user_input = {
         'bmi': data.bmi,
