@@ -1,10 +1,12 @@
 from fastapi import FastAPI
+from mangum import Mangum
 from fastapi.responses import JSONResponse
 from schema.user_input import UserInput
 from schema.prediction_response import PredictionResponse
 from model.predict import predict_output, model, MODEL_VERSION
 
 app = FastAPI()
+handler = Mangum(app)
 
 # human readable       
 @app.get('/')
